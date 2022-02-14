@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Controller\MeController;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,7 +15,14 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-#[ApiResource()]
+#[ApiResource(collectionOperations: [
+    'get',
+    'post',
+    'me' => [
+        'method' => 'GET',
+        'path' => '/me',
+        'controller' => MeController::class,
+    ]])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -48,16 +58,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=News::class, mappedBy="author", orphanRemoval=true)
+     */
+    private $news;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediaObject::class, mappedBy="user")
+     */
+    private $uploadedFiles;
+
 
     public function __construct()
     {
+        $this->news = new ArrayCollection();
+        $this->uploadedFiles = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
 
     /**
      * A visual identifier that represents this user.
@@ -163,6 +184,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|News[]
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): self
+    {
+        if (!$this->news->contains($news)) {
+            $this->news[] = $news;
+            $news->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): self
+    {
+        if ($this->news->removeElement($news)) {
+            // set the owning side to null (unless already changed)
+            if ($news->getAuthor() === $this) {
+                $news->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MediaObject[]
+     */
+    public function getUploadedFiles(): Collection
+    {
+        return $this->uploadedFiles;
+    }
+
+    public function addUploadedFile(MediaObject $uploadedFile): self
+    {
+        if (!$this->uploadedFiles->contains($uploadedFile)) {
+            $this->uploadedFiles[] = $uploadedFile;
+            $uploadedFile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUploadedFile(MediaObject $uploadedFile): self
+    {
+        if ($this->uploadedFiles->removeElement($uploadedFile)) {
+            // set the owning side to null (unless already changed)
+            if ($uploadedFile->getUser() === $this) {
+                $uploadedFile->setUser(null);
+            }
+        }
 
         return $this;
     }

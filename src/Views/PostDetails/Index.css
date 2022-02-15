@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.back-to-results {
+    font-size: 15px;
+    margin-left: 9em;
+    margin-top: 2em;
+    color: #d35400;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.back-to-results:hover {
+    margin-left: 8em;
+}
+
+.hero-banner-bis {
+    padding: 40px;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.hero-banner-bis p{
+    margin-top: 127px;
+    font-size: 50px;
+    line-height: 100px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    max-width: 1440px;
+}
+
+.infos-bis {
+    display: flex;
+    padding: 20px 0px;
+    border-bottom: 1px solid #1a1b1f;
+    margin: 60px 0px 80px;
+    border-top: 5px solid #1a1b1f;
+}
+
+.row-bis {
+    --gutter-x: 1.5rem;
+    --gutter-y: 0;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: calc(var(--gutter-y) * -1);
+    margin-right: calc(var(--gutter-x)/ -2);
+    margin-left: calc(var(--gutter-x)/ -2);
+    flex: 1;
+    margin-left: 0px;
+}
+
+.row-bis div:first-child {
+    letter-spacing: 0px;
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.row-bis div:last-child {
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    margin-top: 0px;
+    padding: 0px;
+    opacity: 0.7;
+}
+
+.description-bis {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.description-bis .title-bis {
+    font-weight: 500;
+    font-size: 22px;
+    color: #121212;
+    letter-spacing: 0px;
+}
+
+.description-bis div {
+    font-size: 20px;
+    line-height: 35px;
+    font-weight: 200;
+    letter-spacing: 0.3px;
+    color: #323947;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
+.comment-title-bis {
+    color: #121212;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 42px;
+    letter-spacing: 0px;
+    padding: 40px 0px;
+    border-bottom: 1px solid #999999;
+    margin: 0px 0px 0px;
+    border-top: 5px solid #1a1b1f;
+}
+
+
+.comment-bis {
+    border-bottom: 1px solid #999999;
+}
+
+.comment-row-bis {
+    display: flex;
+}
+
+.comment-date-bis {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #999999;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.comment-date-bis span{
+    font-size: 15px;
+    margin: 1em 0;
+    color: #999999;
+}
+
+.comment-content-bis {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: #999999;
+}

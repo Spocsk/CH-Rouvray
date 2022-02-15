@@ -9,7 +9,7 @@ export default function NewpostForm() {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [error, setError] = useState("");
-  const { isShowing, toggle } = useModal();
+  const { toggle } = useModal();
   const user = getUser();
 
 
@@ -17,8 +17,8 @@ export default function NewpostForm() {
     try {
       Object.assign(data, {author: `/api/users/${user.id}`});
       await postNews(data)
-      .then((res) => {
-          toggle()
+      .then(() => {
+          (() => {toggle()})()
       })
     }
     catch(err) {
@@ -32,7 +32,7 @@ export default function NewpostForm() {
    
   return (
     <>
-    <button onClick={() => {closeModal()}}>Toggle</button>
+      <button onClick={() => {closeModal()}}>Toggle</button>
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <input className="txtBox" {...register("title", { required: true})} placeholder='Ajouter titre' />

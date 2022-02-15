@@ -107,6 +107,8 @@
     border-bottom: 1px solid #999999;
     margin: 0px 0px 0px;
     border-top: 5px solid #1a1b1f;
+    display: flex;
+    justify-content: space-between;
 }
 
 

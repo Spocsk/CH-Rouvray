@@ -3,12 +3,12 @@ import Post from "../../Components/Dashboard/Post/Post";
 import Button from "../../Components/Others/Button/Button";
 import Divider from "../../Components/Others/Divider";
 import Navbar from "../../Components/Others/Navbar";
-import './style.css'
 import useModal from "../../Components/Others/Modal/useModal";
 import Modal from "../../Components/Others/Modal/Modal";
 import { getNews } from '../../Utils/Api/News/NewsApiRequests'
 import NewPostForm from '../../Components/Dashboard/Post/NewPostForm/NewPostForm'
 import { useNavigate } from 'react-router-dom';
+import './style.css'
 
 
 const Dashboard = () => {
@@ -17,7 +17,6 @@ const Dashboard = () => {
     const [news, setNews] = useState([]);
     const navigate = useNavigate()
     const redirectToPostDetails = (id) => {
-        console.log(id)
         navigate('/post',{
             state: {
                 postId: id
@@ -36,7 +35,7 @@ const Dashboard = () => {
                 <div className="title-container">
                     <p>Les Posts</p>
                 </div>
-                <img src="https://images.pexels.com/photos/1467217/pexels-photo-1467217.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+                <img src="https://images.pexels.com/photos/1467217/pexels-photo-1467217.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="herobanner">
                 </img>
             </div>
             <main>
@@ -55,8 +54,8 @@ const Dashboard = () => {
                                             title={item.title}
                                             description={item.description}
                                             comments={item.comments.length}
-                                            createdAt={item.createdAt}
-                                            author={item.author}
+                                            createdAt={new Date(item.createdAt).toLocaleString('FR')}
+                                            author={item.author.firstName + ' ' + item.author.lastName}
                                         ></Post>
                                     </div>
                                 )
